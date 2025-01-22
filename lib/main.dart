@@ -1,4 +1,5 @@
 import 'package:chat_app/cubits/cubit/login_cubit.dart';
+import 'package:chat_app/cubits/cubit/register_cubit.dart';
 import 'package:chat_app/views/chat_view.dart';
 import 'package:chat_app/views/login_view.dart';
 import 'package:chat_app/views/register_view.dart';
@@ -19,13 +20,22 @@ class CatChat extends StatelessWidget {
   const CatChat({super.key});
 
   // This widget is the root of your application.
+
+
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => LoginCubit(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => LoginCubit(),
+        ),
+        BlocProvider(
+          create: (context) => RegisterCubit(),
+        ),
+      ],
       child: MaterialApp(
         routes: {
-          RegisterView.id: (context) => const RegisterView(),
+          RegisterView.id: (context) =>  RegisterView(),
           LoginView.id: (context) => LoginView(),
           ChatView.id: (context) => ChatView(),
         },
